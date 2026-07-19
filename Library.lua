@@ -55,6 +55,60 @@ function Library:CreateWindow(Config)
     ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
     ScreenGui.Parent = (RunService:IsStudio() and game.Players.LocalPlayer.PlayerGui) or CoreGui
 
+        -- // Loading Frame
+    local LoadFrame = Instance.new("Frame")
+    LoadFrame.Name = "LoadFrame"
+    LoadFrame.Parent = ScreenGui
+    LoadFrame.BackgroundColor3 = Colors.MainBlack
+    LoadFrame.BorderSizePixel = 0
+    LoadFrame.Position = UDim2.new(0.5, -200, 0.5, -30)
+    LoadFrame.Size = UDim2.new(0, 400, 0, 60)
+    Instance.new("UICorner", LoadFrame).CornerRadius = UDim.new(0, 8)
+
+    local LoadLogo = Instance.new("ImageLabel", LoadFrame)
+    LoadLogo.BackgroundTransparency = 1
+    LoadLogo.Position = UDim2.new(0, 10, 0, 10)
+    LoadLogo.Size = UDim2.new(0, 40, 0, 40)
+    LoadLogo.Image = Assets.Logo
+
+    local LoadHubName = Instance.new("TextLabel", LoadFrame)
+    LoadHubName.BackgroundTransparency = 1
+    LoadHubName.Position = UDim2.new(0, 60, 0, 10)
+    LoadHubName.Size = UDim2.new(0, 200, 0, 20)
+    LoadHubName.Font = Enum.Font.GothamBold
+    LoadHubName.Text = HubName
+    LoadHubName.TextColor3 = Colors.Cyan
+    LoadHubName.TextSize = 16
+    LoadHubName.TextXAlignment = Enum.TextXAlignment.Left
+
+    local LoadDesc = Instance.new("TextLabel", LoadFrame)
+    LoadDesc.BackgroundTransparency = 1
+    LoadDesc.Position = UDim2.new(0, 60, 0, 30)
+    LoadDesc.Size = UDim2.new(0, 200, 0, 15)
+    LoadDesc.Font = Enum.Font.Gotham
+    LoadDesc.Text = Description
+    LoadDesc.TextColor3 = Colors.Gray
+    LoadDesc.TextSize = 12
+    LoadDesc.TextXAlignment = Enum.TextXAlignment.Left
+
+    local LoadPercent = Instance.new("TextLabel", LoadFrame)
+    LoadPercent.BackgroundTransparency = 1
+    LoadPercent.Position = UDim2.new(1, -60, 0, 20)
+    LoadPercent.Size = UDim2.new(0, 50, 0, 20)
+    LoadPercent.Font = Enum.Font.GothamBold
+    LoadPercent.Text = "0%"
+    LoadPercent.TextColor3 = Colors.Cyan
+    LoadPercent.TextSize = 18
+
+    -- // Loading Logic
+    MainFrame.Visible = false
+    for i = 0, 100, 10 do
+        LoadPercent.Text = i .. "%"
+        task.wait(0.2)
+    end
+    LoadFrame:Destroy()
+    MainFrame.Visible = true
+
     -- // Main Frame
     local MainFrame = Instance.new("Frame")
     MainFrame.Name = "MainFrame"
